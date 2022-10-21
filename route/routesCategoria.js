@@ -1,15 +1,25 @@
 /*IMPORTA O PACOTE DO EXPRESS PARA O SCRIPT index.js*/
 const express = require('express');
+const modelCategoria = require('../model/modelCategorias');
 
 /*GERENCIADOR DE ROTAS DO EXPRESS*/
-const Router = express.Router();
+const router = express.Router();
 
 /** ROTAS DE CRUD DE CATEGORIA **/
 //ROTA DE CADASTRO DE CATEGORIA
 //NOME(P1, P2, P3, P4){}
 router.post('/cadastrarCategoria', (req, res)=>{
+    console.log(req.body);
+
+    let {nome_categoria} = req.body;
+    //let nome_categoria = req.body.nome_categoria;
+
+    //Fazendo um insert na tabela
+    modelCategoria.create(
+        //Dados de inserção
+        {nome_categoria}
+    ).then(res.send('Cadastrado com sucesso :)'));
     res.send('ROTA DE CADASTRO DE CATEGORIA!');
-    // console.log('TESTE DE NODEMON');
 });
 
 //ROTA DE LEITURA DE CATEGORIA
